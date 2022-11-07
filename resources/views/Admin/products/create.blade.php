@@ -34,8 +34,13 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image"
-                                    type="button" role="tab" aria-controls="contact"
-                                    aria-selected="false">Product Images</button>
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">Product
+                                    Images</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="product-color-tab" data-bs-toggle="tab"
+                                    data-bs-target="#productColor" type="button" role="tab" aria-controls="contact"
+                                    aria-selected="false">Product Color</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -116,16 +121,16 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="mb-3 mt-3">
-                                            <label for="" class="fw-bold mb-2">Trending</label>
+                                            <label for=""  class="fw-bold mb-2">Trending</label> <br>
                                             <input type="checkbox" name="trending" style="width: 50px; height:50px;"
-                                                class="form-control">
+                                                >
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="mb-3 mt-3">
-                                            <label for="" class="fw-bold mb-2">Status</label>
+                                            <label for="" class="fw-bold mb-2">Status</label> <br>
                                             <input type="checkbox" name="status" style="width: 50px; height:50px;"
-                                                class="form-control">
+                                               >
                                         </div>
                                     </div>
                                 </div>
@@ -136,6 +141,22 @@
                                     <input type="file" name="image[]" multiple class="form-control" />
                                 </div>
                             </div>
+                            {{-- <div class="tab-pane fade" id="productColor" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="m-4">
+                                    <label for="">Select Color</label>
+                                    <div class="row">
+                                        @forelse ($colors as $color)
+                                            <div class="col-md-3">
+                                                <input type="checkbox" name="color[]">
+                                            </div>
+                                        @empty
+                                          <div class="col-md-12">
+                                            <h1>No colors found..!!</h1>
+                                          </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div> --}}
                         </div>
                         <div class="">
                             <button type="submit" class="btn btn-primary">Submit</button>

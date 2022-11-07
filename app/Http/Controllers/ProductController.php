@@ -36,6 +36,7 @@ class ProductController extends Controller
         $categories = [
             'categories' => Category::all(),
             'brands' => Brand::all(),
+            // 'colors' => Color::where('status','0')->get(),
         ];
         return view('Admin.products.create', $categories);
     }

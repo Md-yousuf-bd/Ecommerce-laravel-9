@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\Brand\Index;
 
@@ -34,7 +35,7 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::post('/category', [CategoryController::class, 'store']);
     Route::get('/category/{category}/edit', [CategoryController::class, 'edit']);
     Route::put('/category/{category}', [CategoryController::class, 'update']);
-    ////product controller
+    ////product route
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products', [ProductController::class, 'store']);
@@ -44,6 +45,12 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/products/{product_id}/delete', [ProductController::class, 'destroy']);
     //////state Brand route
     Route::get('/brands',Index::class);
+    ////color route
+    Route::get('/colors', [ColorController::class, 'index']);
+    Route::get('/colors/create', [ColorController::class, 'create']);
+    Route::post('/colors/create', [ColorController::class, 'store']);
+    Route::get('/colors/{color}/edit', [ColorController::class, 'edit']);
+    Route::put('/colors/{color}', [ColorController::class, 'update']);
 });
 
 Auth::routes();
