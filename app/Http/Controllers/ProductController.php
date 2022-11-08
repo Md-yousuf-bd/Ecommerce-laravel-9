@@ -10,6 +10,7 @@ use App\Models\ProductImage;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Color;
 
 class ProductController extends Controller
 {
@@ -36,7 +37,7 @@ class ProductController extends Controller
         $categories = [
             'categories' => Category::all(),
             'brands' => Brand::all(),
-            // 'colors' => Color::where('status','0')->get(),
+            'colors' => Color::where('status','0')->get(),
         ];
         return view('Admin.products.create', $categories);
     }
@@ -79,6 +80,16 @@ class ProductController extends Controller
                 $product->productImages()->create([
                     'product_id' => $product->id,
                     'image' => $finalImagePathName,
+                ]);
+            }
+        }
+
+        if($request->colors){
+            foreach($request->colors as $key => $color){
+                $product->productColors()->create([
+                    'product_id' => $product->id,
+                    'color_id' => $color,
+                    'quantity' => $request->colorQuantity[$key] ?? 0
                 ]);
             }
         }

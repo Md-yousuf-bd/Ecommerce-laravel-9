@@ -141,13 +141,16 @@
                                     <input type="file" name="image[]" multiple class="form-control" />
                                 </div>
                             </div>
-                            {{-- <div class="tab-pane fade" id="productColor" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="tab-pane fade" id="productColor" role="tabpanel" aria-labelledby="contact-tab">
                                 <div class="m-4">
-                                    <label for="">Select Color</label>
+                                    <label for="" class="mb-3">Select Color</label>
                                     <div class="row">
                                         @forelse ($colors as $color)
-                                            <div class="col-md-3">
-                                                <input type="checkbox" name="color[]">
+                                            <div class="col-3 border m-2  p-2">
+                                              Color:  <input class="mb-3" type="checkbox" name="colors[{{ $color->id }}]" value="{{ $color->id }}">
+                                                {{ $color->name }}
+                                                <br/>
+                                              Quantity: <input type="number" name="colorQuantity[{{ $color->id }}]" style="width:70px; border:1px solid">
                                             </div>
                                         @empty
                                           <div class="col-md-12">
@@ -156,7 +159,7 @@
                                         @endforelse
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="">
                             <button type="submit" class="btn btn-primary">Submit</button>

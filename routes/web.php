@@ -51,6 +51,7 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::post('/colors/create', [ColorController::class, 'store']);
     Route::get('/colors/{color}/edit', [ColorController::class, 'edit']);
     Route::put('/colors/{color}', [ColorController::class, 'update']);
+    Route::get('/colors/{color}/delete',[ColorController::class, 'destroy']);
 });
 
 Auth::routes();

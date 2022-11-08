@@ -26,8 +26,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Code</th>
+                                    <th>Color Name</th>
+                                    <th>Color Code</th>
                                     <th>status</th>
                                     <th>Action</th>
                                 </tr>
@@ -40,7 +40,7 @@
                                         <td>{{ $color->code }}</td>
                                         <td>{{ $color->status == '1' ? 'Hidden' : 'Visible' }}</td>
                                         <td>
-                                            <a href="{{ url('other/colors/'.$color->id.'/edit') }}" class="btn btn-sm btn-success">Edit</a>
+                                            <a href="{{ url('other/colors/'.$color->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
                                             <a href="{{ url('other/colors/'.$color->id.'/delete') }}" onclick="return confirm('Are you sure, you want to delete ')" class="btn btn-sm btn-danger">delete</a>
                                     </tr>
                                 @empty
