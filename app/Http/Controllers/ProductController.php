@@ -119,6 +119,8 @@ class ProductController extends Controller
             'categories' => Category::all(),
             'brands' => Brand::all(),
             'product' => $product,
+            'product_color' => $product->productColors->pluck('color_id')->toArray(),
+            'colors' => Color::whereNOtIn('id', $product->id)->get(),
         ];
         return view('Admin.products.edit', $data);
     }

@@ -45,6 +45,11 @@
                                     type="button" role="tab" aria-controls="contact" aria-selected="false">Product
                                     Images</button>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#color"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">Product
+                                    Colors</button>
+                            </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
@@ -144,7 +149,7 @@
                                     <div class="col-4">
                                         <div class="mb-3 mt-3">
                                             <label for="" class="fw-bold mb-2">Status</label>
-                                            <input type="checkbox" value="{{ $product->status}}" name="status"
+                                            <input type="checkbox" value="{{ $product->status }}" name="status"
                                                 style="width: 50px; height:50px;" class="form-control">
                                         </div>
                                     </div>
@@ -172,22 +177,46 @@
                                 </div> --}}
                                 <div>
                                     @if ($product->productImages)
-                                    <div class="row mb-4">
-                                        @foreach ($product->productImages as $image)
-                                        <div class="col-md-2">
-                                            <img src="{{ asset($image->image) }}" style="width: 80px; height:80px;" class="m-4 border " alt="">
-                                            <a href="{{ url('other/product-image/'.$image->id.'/delete') }}" class="d-block ms-4">Remove</a>
+                                        <div class="row mb-4">
+                                            @foreach ($product->productImages as $image)
+                                                <div class="col-md-2">
+                                                    <img src="{{ asset($image->image) }}"
+                                                        style="width: 80px; height:80px;" class="m-4 border "
+                                                        alt="">
+                                                    <a href="{{ url('other/product-image/' . $image->id . '/delete') }}"
+                                                        class="d-block ms-4">Remove</a>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        @endforeach
-                                    </div>
                                     @else
                                         <h5>NO image Added</h5>
                                     @endif
 
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="color" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="m-4">
+                                    <label for="" class="mb-3">Select Color</label>
+                                    <div class="row">
+                                        @forelse ($colors as $color)
+                                            <div class="col-3 border m-2  p-2">
+                                                Color: <input class="mb-3" type="checkbox"
+                                                    name="colors[{{ $color->id }}]" value="{{ $color->id }}">
+                                                {{ $color->name }}
+                                                <br />
+                                                Quantity: <input type="number" name="colorQuantity[{{ $color->id }}]"
+                                                    style="width:70px; border:1px solid">
+                                            </div>
+                                        @empty
+                                            <div class="col-md-12">
+                                                <h1>No colors found..!!</h1>
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="">
+                        <div class="mt-3">
                             <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
