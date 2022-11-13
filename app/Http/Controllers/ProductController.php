@@ -115,12 +115,15 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $ProductId = $product->id;
+        // $product_color = $ProductId->productColors->pluck('color_id')->toArray();
+        $product_color = $product->productColors->pluck('color_id')->toArray();
         $data = [
             'categories' => Category::all(),
             'brands' => Brand::all(),
             'product' => $product,
             'product_color' => $product->productColors->pluck('color_id')->toArray(),
-            'colors' => Color::whereNOtIn('id', $product->id)->get(),
+            'colors' => Color::whereNOtIn('id', $product_color)->get(),
         ];
         return view('Admin.products.edit', $data);
     }

@@ -196,6 +196,7 @@
                             </div>
                             <div class="tab-pane fade" id="color" role="tabpanel" aria-labelledby="contact-tab">
                                 <div class="m-4">
+                                    <h4>Add Product Color</h4>
                                     <label for="" class="mb-3">Select Color</label>
                                     <div class="row">
                                         @forelse ($colors as $color)
@@ -213,6 +214,37 @@
                                             </div>
                                         @endforelse
                                     </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Color Name</th>
+                                                <th>Quantity</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($product->productColors as $proColor)
+                                                <tr>
+                                                    <td>{{ $proColor->color->name }}</td>
+                                                    <td>
+                                                        <div class="input-group mb-3" style="width:150px">
+                                                            <input type="text" value="{{ $proColor->quantity }}"
+                                                                class="form-control form-control-sm">
+                                                            <button type="button" value="{{ $proColor->id }}"
+                                                                class="btn btn-primary btn-sm text-white">Update</button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" value="{{ $proColor->id }}"
+                                                            class="btn btn-danger btn-sm text-white">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
