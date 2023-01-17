@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
@@ -43,6 +44,8 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::put('/products/{product}', [ProductController::class, 'update']);
     Route::get('/product-image/{product_image_id}/delete', [ProductController::class, 'destroyImage']);
     Route::get('/products/{product_id}/delete', [ProductController::class, 'destroy']);
+    Route::post('/product-color/{prod_color_id}', [ProductController::class, 'updateProductColorQty']);
+    Route::get('/product-color/delete/{prod_color_id}', [ProductController::class, 'destroyProductColor']);
     //////state Brand route
     Route::get('/brands',Index::class);
     ////color route
@@ -52,6 +55,13 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/colors/{color}/edit', [ColorController::class, 'edit']);
     Route::put('/colors/{color}', [ColorController::class, 'update']);
     Route::get('/colors/{color}/delete',[ColorController::class, 'destroy']);
+
+    //admin slider route
+    Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');
+    Route::get('/slider/create', [SliderController::class, 'create'])->name('slider.create');
+    Route::post('/slider/create/store', [SliderController::class, 'store'])->name('sliders.store');
+
+
 });
 
 Auth::routes();

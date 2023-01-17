@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Color;
+use App\Models\ProductColor;
+use Illuminate\Console\View\Components\Alert;
 
 class ProductController extends Controller
 {
@@ -37,7 +40,7 @@ class ProductController extends Controller
         $categories = [
             'categories' => Category::all(),
             'brands' => Brand::all(),
-            'colors' => Color::where('status','0')->get(),
+            'colors' => Color::where('status', '0')->get(),
         ];
         return view('Admin.products.create', $categories);
     }
@@ -84,8 +87,8 @@ class ProductController extends Controller
             }
         }
 
-        if($request->colors){
-            foreach($request->colors as $key => $color){
+        if ($request->colors) {
+            foreach ($request->colors as $key => $color) {
                 $product->productColors()->create([
                     'product_id' => $product->id,
                     'color_id' => $color,
@@ -172,16 +175,16 @@ class ProductController extends Controller
                 }
             }
             return redirect('/other/products')->with('massage', 'Product Update success!!');
-
         } else {
             return redirect('/other/products')->with('massage', 'No such Product Id Found!!');
         }
     }
 
 
-    public function destroyImage($product_image_id){
+    public function destroyImage($product_image_id)
+    {
         $productImage = ProductImage::findOrFail($product_image_id);
-        if(File::exists($productImage->image)){
+        if (File::exists($productImage->image)) {
             File::delete($productImage->image);
         }
         $productImage->delete();
@@ -197,14 +200,28 @@ class ProductController extends Controller
     public function destroy($product_id)
     {
         $product = product::findOrFail($product_id);
-        if($product->productImages){
-            foreach($product->productImages() as $image){
-                if(File::exists($image->image)){
+        if ($product->productImages) {
+            foreach ($product->productImages() as $image) {
+                if (File::exists($image->image)) {
                     File::delete($image->$image);
                 }
             }
         }
         $product->delete();
         return redirect()->back()->with('message', 'Product Deleted With All Its Image!!');
+    }
+
+    public function updateProductColorQty(Request $request, $prod_color_id)
+    {
+        $productColorData = Product::findOrFail($request->product_id)->productColors()->where('id',$prod_color_id)->first();
+        $productColorData->update([
+            'quantity' => $request->qty
+        ]);
+        return response()->json(['message' => 'Product Color Qty update']);
+    }
+    public function destroyProductColor($prod_color_id){
+        $productColor = ProductColor::findOrFail($prod_color_id);
+        $productColor->delete();
+        return response()->json(['message' => 'Product Color Delete']);
     }
 }

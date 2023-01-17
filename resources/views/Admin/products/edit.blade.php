@@ -227,19 +227,25 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($product->productColors as $proColor)
-                                                <tr>
-                                                    <td>{{ $proColor->color->name }}</td>
+                                                <tr class="prod-color-tr">
+                                                    <td>
+                                                        @if ($proColor->color)
+                                                            {{ $proColor->color->name }}
+                                                        @else
+                                                            NO Color Found
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="input-group mb-3" style="width:150px">
                                                             <input type="text" value="{{ $proColor->quantity }}"
-                                                                class="form-control form-control-sm">
+                                                                class="productColorQuantity form-control form-control-sm">
                                                             <button type="button" value="{{ $proColor->id }}"
-                                                                class="btn btn-primary btn-sm text-white">Update</button>
+                                                                class="updateProductColorBtn btn btn-primary btn-sm text-white">Update</button>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <button type="button" value="{{ $proColor->id }}"
-                                                            class="btn btn-danger btn-sm text-white">Delete</button>
+                                                            class="deleteProductColorBtn btn btn-danger btn-sm text-white">Delete</button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -256,4 +262,52 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(document).on('click', '.updateProductColorBtn', function() {
+                var product_id = "{{ $product->id }}";
+                var prod_color_id = $(this).val();
+                var qty = $(this).closest('.prod-color-tr').find('.productColorQuantity').val();
+                if (qty <= 0) {
+                    alert('Quantity is required')
+                    return false;
+                }
+                var data = {
+                    'product_id': product_id,
+                    'prod_color_id': prod_color_id,
+                    'qty': qty
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/other/product-color/" + prod_color_id,
+                    data: data,
+                    success: function(response) {
+                        alert(response.message)
+                    }
+                })
+            });
+            $(document).on('click', '.deleteProductColorBtn', function() {
+                let prod_color_id = $(this).val();
+                let thisClick = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: "/other/product-color/delete/"+prod_color_id,
+                    success: function(response) {
+                        thisClick.closest('.prod-color-tr').remove();
+                        alert(response.message);
+                    }
+                })
+            });
+        });
+    </script>
 @endsection
