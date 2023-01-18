@@ -34,7 +34,7 @@ class SliderController extends Controller
       Slider::create([
         'title' =>$validateData['title'],
         'description' =>$validateData['description'],
-        'image' =>$validateData['image'],
+        'image' =>$validateData['image'] ?? '',
         'status' =>$validateData['status'],
       ]);
       return redirect('other/slider')->with('massage','Slider added Successfully');
@@ -69,7 +69,7 @@ class SliderController extends Controller
         Slider::where('id',$id)->update([
           'title' =>$validateData['title'],
           'description' =>$validateData['description'],
-          'image' =>$validateData['image'],
+          'image' =>$validateData['image'] ?? $slider->image,
           'status' =>$validateData['status'],
         ]);
         return redirect('other/slider')->with('massage','Slider updated Successfully');
