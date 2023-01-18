@@ -40,8 +40,9 @@
                                         <td><img src="{{ asset($Data->image) }}" alt="" height="50px" width="50px"></td>
                                         <td>{{ $Data->status == '1' ? 'Hidden' : 'Visible' }}</td>
                                         <td>
-                                            <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                            <a href="" onclick="return confirm('Are you sure, you want to delete ')" class="btn btn-sm btn-danger">delete</a>
+                                            {{-- <a href="{{ route('') }}" class="btn btn-sm btn-primary">Edit</a> --}}
+                                            <a href="{{ route('slider.edit', $Data->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('slider.delete', $Data->id) }}" onclick="return confirm('Are you sure, you want to delete ')" class="btn btn-sm btn-danger">delete</a>
                                     </tr>
                                 @empty
                                     <tr>

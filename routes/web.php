@@ -60,6 +60,9 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');
     Route::get('/slider/create', [SliderController::class, 'create'])->name('slider.create');
     Route::post('/slider/create/store', [SliderController::class, 'store'])->name('sliders.store');
+    Route::get('/slider/edit/{slider_id}', [SliderController::class, 'edit'])->name('slider.edit');
+    Route::put('/slider/update/{slider_id}', [SliderController::class, 'update'])->name('slider.update');
+    Route::get('/slider/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
 
 
 });

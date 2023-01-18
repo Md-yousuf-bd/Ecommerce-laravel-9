@@ -39,6 +39,7 @@
         </div>
     </div>
 
+    
     <!-- plugins:js -->
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <!-- Plugin js for this page-->
@@ -54,6 +55,8 @@
     <script src="{{ asset('admin/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script>
     <!-- End custom js for this page-->
+    <!-- jquery compress  -->
+    <Script src="{{ asset('admin/js/jquary.main.js') }}"></Script>
 
     @yield('scripts')
 
