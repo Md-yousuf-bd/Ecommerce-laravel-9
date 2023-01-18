@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\Brand\Index;
 
@@ -25,7 +26,7 @@ use App\Http\Livewire\Admin\Brand\Index;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/',[FrontendController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

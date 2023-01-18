@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    
+
     <!-- plugins:js -->
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <!-- Plugin js for this page-->
