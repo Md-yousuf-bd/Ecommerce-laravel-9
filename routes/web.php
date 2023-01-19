@@ -22,14 +22,18 @@ use App\Http\Livewire\Admin\Brand\Index;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// frontend Route
 
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/',[FrontendController::class, 'index']);
+Route::get('/collections',[FrontendController::class, 'categories']);
+Route::get('/collections/{category_slug}',[FrontendController::class, 'products']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// admin route
 Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/category', [CategoryController::class, 'index']);
@@ -64,8 +68,6 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/slider/edit/{slider_id}', [SliderController::class, 'edit'])->name('slider.edit');
     Route::put('/slider/update/{slider_id}', [SliderController::class, 'update'])->name('slider.update');
     Route::get('/slider/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
-
-
 });
 
 Auth::routes();
