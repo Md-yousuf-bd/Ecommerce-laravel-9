@@ -50,7 +50,7 @@ class CategoryController extends Controller
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
             $file->move('uploads/category/', $filename);
-            $category->image = $filename.$uploadPath;
+            $category->image = $uploadPath.$filename;
         }
         $category->meta_title = $validatedData['meta_title'];
         $category->meta_keyword = $validatedData['meta_keyword'];

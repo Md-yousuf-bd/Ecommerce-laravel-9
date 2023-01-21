@@ -1,16 +1,18 @@
 <div>
     <div class="row">
         <div class="col-md-3">
+            @if($category->brands)
             <div class="card">
                 <div class="card-header">Brands</div>
                 <div class="card-body">
                     @foreach ( $category->brands as $brandItem )
                     <label class="d-block">
-                        <input type="checkbox" value="{{ $brandItem->name }}"> {{ $brandItem->name }}
+                        <input type="checkbox" wire:model="brandInputs" value="{{ $brandItem->name }}"> {{ $brandItem->name }}
                     </label>
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
         <div class="col-md-9">
             <div class="row">
