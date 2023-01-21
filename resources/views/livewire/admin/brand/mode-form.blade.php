@@ -11,6 +11,18 @@
             <form wire:submit.prevent='storeBrand()' action="">
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label class="form-label">Select category</label>
+                        <select wire:model.defer="category_id" class="form-control">
+                            <option value="">--Select Category--</option>
+                            @foreach ($categories as $cateItem)
+                                <option value="{{ $cateItem->id }}">{{ $cateItem->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <small class="text-danger">{{ $massage }}</small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Brand Name</label>
                         <input wire:model.defer="name" type="text" class="form-control" placeholder="Brand Name">
                         @error('name')
@@ -61,6 +73,18 @@
             <div wire:loading.remove>
                 <form wire:submit.prevent='updateBrand()'>
                     <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Select category</label>
+                            <select wire:model.defer="category_id" class="form-control">
+                                <option value="">--Select Category--</option>
+                                @foreach ($categories as $cateItem)
+                                    <option value="{{ $cateItem->id }}">{{ $cateItem->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <small class="text-danger">{{ $massage }}</small>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Brand Name</label>
                             <input wire:model.defer="name" type="text" class="form-control"
@@ -127,4 +151,3 @@
         </div>
     </div>
 </div>
-

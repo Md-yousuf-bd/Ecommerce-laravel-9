@@ -80,8 +80,8 @@
                                             <--select Brand-->
                                         </option>
                                         @foreach ($brands as $brand)
-                                            <option value="{{ $brand->id }}"
-                                                {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                                            <option value="{{ $brand->name }}"
+                                                {{ $brand->name == $product->brand ? 'selected' : '' }}>
                                                 {{ $brand->name }}</option>
                                         @endforeach
                                     </select>

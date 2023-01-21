@@ -1,7 +1,5 @@
 <div>
-
     @include('livewire.admin.brand.mode-form')
-
     <div class="row">
         <div class="col-md-12">
             @if (session('massage'))
@@ -21,6 +19,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th>Category</th>
                                 <th>Slug</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -31,6 +30,13 @@
                                 <tr>
                                     <td>{{ $brand->id }}</td>
                                     <td>{{ $brand->name }}</td>
+                                    <td>
+                                        @if ($brand->category)
+                                            {{ $brand->category->name }}
+                                        @else
+                                            No category
+                                        @endif
+                                    </td>
                                     <td>{{ $brand->slug }}</td>
                                     <td>{{ $brand->status == '1' ? 'hidden' : 'visible' }}</td>
                                     <td>
@@ -46,7 +52,6 @@
                                     <td colspan="5">No Brands Found</td>
                                 </tr>
                             @endforelse
-
                         </tbody>
                     </table>
                 </div>
