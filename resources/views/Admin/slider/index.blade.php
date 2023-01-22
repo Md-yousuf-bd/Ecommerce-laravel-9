@@ -46,7 +46,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">No Colors Available</td>
+                                        <td colspan="6">No Colors Available</td>
                                     </tr>
                                 @endforelse
                             </tbody>
