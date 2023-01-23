@@ -1,11 +1,4 @@
 <div>
-    <div>
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
-    </div>
     <div class="py-3 py-md-5 bg-light">
         <div class="container">
             <div class="row">
@@ -67,8 +60,7 @@
                         </div>
                         <div class="mt-2">
                             <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</a>
-                            <a href="" type="button" wire:click="addToWishList({{ $product->id }})"
-                                class="btn btn1"> <i class="fa fa-heart"></i> Add To Wishlist </a>
+                            <a href="" type="button" wire:click="addToWishList({{ $product->id }})" class="btn btn1"> <i class="fa fa-heart"></i> Add To Wishlist </a>
                         </div>
                         <div class="mt-3">
                             <h5 class="mb-0">Small Description</h5>
