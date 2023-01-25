@@ -8,6 +8,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\Brand\Index;
 
@@ -31,6 +32,8 @@ Route::get('/',[FrontendController::class, 'index']);
 Route::get('/collections',[FrontendController::class, 'categories']);
 Route::get('/collections/{category_slug}',[FrontendController::class, 'products']);
 Route::get('/collections/{category_slug}/{product_slug}',[FrontendController::class, 'productView']);
+
+Route::get('/wishlist',[WishlistController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
