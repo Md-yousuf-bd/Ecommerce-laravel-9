@@ -92,6 +92,7 @@ class View extends Component
                                     'product_color_id' => $this->productColorId,
                                     'quantity' => $this->quantityCount
                                 ]);
+                                 $this->emit('cartAddedUpdate');
                                 $this->dispatchBrowserEvent('message', [
                                     'text' => 'Product added to cart Success',
                                     'type' => 'success',
@@ -137,6 +138,7 @@ class View extends Component
                                     'product_id' => $ProductId,
                                     'quantity' => $this->quantityCount
                                 ]);
+                                $this->emit('cartAddedUpdate');
                                 $this->dispatchBrowserEvent('message', [
                                     'text' => 'Product added to cart Success',
                                     'type' => 'success',
@@ -173,73 +175,6 @@ class View extends Component
             ]);
         }
     }
-
-
-    // if (Auth::check()) {
-    //     if ($this->product->where('id', $ProductId)->where('status', '0')->exists()) {
-    //         //check for product color quantity and add to card
-    //         if ($this->product->productColors()->count() > 1) {
-    //             if ($this->productColorSelectedQuantity != NULL) {
-    //                 $productColor = $this->product->productColors()->where('id', $this->productColorId)->first();
-    //                 if ($productColor->quantity > 0) {
-    //                     if ($productColor->quantity > $this->quantityCount) {
-    //                         //insert product to cart
-    //                         dd('am add to cart with colors');
-    //                     } else {
-    //                         $this->dispatchBrowserEvent('message', [
-    //                             'text' => 'Only' . $productColor->quantity . 'Quantity Available',
-    //                             'type' => 'warning',
-    //                             'status' => 404
-    //                         ]);
-    //                     }
-    //                 } else {
-    //                     $this->dispatchBrowserEvent('message', [
-    //                         'text' => 'Out of stock',
-    //                         'type' => 'warning',
-    //                         'status' => 404
-    //                     ]);
-    //                 }
-    //             } else {
-    //                 $this->dispatchBrowserEvent('message', [
-    //                     'text' => 'Select Your Product color',
-    //                     'type' => 'info',
-    //                     'status' => 404
-    //                 ]);
-    //             }
-    //         } else {
-    //             if ($this->product->quantity > 0) {
-    //                 if ($this->product->quantity > $this->quantityCount) {
-    //                     //insert product to cart
-    //                     dd('am add to cart without colors');
-    //                 } else {
-    //                     $this->dispatchBrowserEvent('message', [
-    //                         'text' => 'Only' . $this->product->quantity . 'Quantity Available',
-    //                         'type' => 'warning',
-    //                         'status' => 404
-    //                     ]);
-    //                 }
-    //             } else {
-    //                 $this->dispatchBrowserEvent('message', [
-    //                     'text' => 'Out of stock',
-    //                     'type' => 'warning',
-    //                     'status' => 409
-    //                 ]);
-    //             }
-    //         }
-    //     } else {
-    //         $this->dispatchBrowserEvent('message', [
-    //             'text' => 'Product Does not exists',
-    //             'type' => 'warning',
-    //             'status' => 404
-    //         ]);
-    //     }
-    // } else {
-    //     $this->dispatchBrowserEvent('message', [
-    //         'text' => 'Please login to add to card',
-    //         'type' => 'danger',
-    //         'status' => 401
-    //     ]);
-    // }
 
 
 
