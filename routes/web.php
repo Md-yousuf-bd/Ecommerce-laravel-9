@@ -2,16 +2,18 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\SliderController;
+use App\Http\Livewire\Admin\Brand\Index;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\WishlistController;
-use App\Http\Controllers\ProductController;
-use App\Http\Livewire\Admin\Brand\Index;
 
 
 /*
@@ -29,21 +31,24 @@ use App\Http\Livewire\Admin\Brand\Index;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/',[FrontendController::class, 'index']);
-Route::get('/collections',[FrontendController::class, 'categories']);
-Route::get('/collections/{category_slug}',[FrontendController::class, 'products']);
-Route::get('/collections/{category_slug}/{product_slug}',[FrontendController::class, 'productView']);
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/collections', [FrontendController::class, 'categories']);
+Route::get('/collections/{category_slug}', [FrontendController::class, 'products']);
+Route::get('/collections/{category_slug}/{product_slug}', [FrontendController::class, 'productView']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/wishlist',[WishlistController::class, 'index']);
-    Route::get('/cart',[CartController::class, 'index']);
+    Route::get('/wishlist', [WishlistController::class, 'index']);
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/checkout', [CheckoutController::class, 'index']);
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/{id}', [OrderController::class, 'view']);
 });
-
+Route::get('thank-you', [FrontendController::class, 'thankyou']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // admin route
-Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
+Route::prefix('other')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/category', [CategoryController::class, 'index']);
     Route::get('/category/create', [CategoryController::class, 'create']);
@@ -61,14 +66,14 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::post('/product-color/{prod_color_id}', [ProductController::class, 'updateProductColorQty']);
     Route::get('/product-color/delete/{prod_color_id}', [ProductController::class, 'destroyProductColor']);
     //////state Brand route
-    Route::get('/brands',Index::class);
+    Route::get('/brands', Index::class);
     ////color route
     Route::get('/colors', [ColorController::class, 'index']);
     Route::get('/colors/create', [ColorController::class, 'create']);
     Route::post('/colors/create', [ColorController::class, 'store']);
     Route::get('/colors/{color}/edit', [ColorController::class, 'edit']);
     Route::put('/colors/{color}', [ColorController::class, 'update']);
-    Route::get('/colors/{color}/delete',[ColorController::class, 'destroy']);
+    Route::get('/colors/{color}/delete', [ColorController::class, 'destroy']);
 
     //admin slider route
     Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');
@@ -77,6 +82,10 @@ Route::prefix('other')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/slider/edit/{slider_id}', [SliderController::class, 'edit'])->name('slider.edit');
     Route::put('/slider/update/{slider_id}', [SliderController::class, 'update'])->name('slider.update');
     Route::get('/slider/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
+
+
+    //order route
+    Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
 });
 
 Auth::routes();

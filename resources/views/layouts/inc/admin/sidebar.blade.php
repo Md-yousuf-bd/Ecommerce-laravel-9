@@ -7,9 +7,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="{{ url('other/orders') }}">
                 <i class="mdi mdi-access-point menu-icon"></i>
-                <span class="menu-title">sales</span>
+                <span class="menu-title">Orders</span>
             </a>
         </li>
         <li class="nav-item">
