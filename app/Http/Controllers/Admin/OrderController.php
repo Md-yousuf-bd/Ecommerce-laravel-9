@@ -11,8 +11,10 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $todayData =  Carbon::now();
-        $data['orders'] = Order::whereDate('created_at',$todayData)->paginate(10);
+        // $todayData =  Carbon::now();
+        $todayData =  '2023-02-09';
+        $data['orders'] = Order::whereDate('created_at',$todayData)->get();
+        // dd($data);
         return view('admin.orders.index',$data);
     }
 }
