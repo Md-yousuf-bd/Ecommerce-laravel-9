@@ -1,20 +1,24 @@
 @extends('layouts.app')
 @section('title', 'home page')
 @section('content')
+    @if (session('massage'))
+        <div class="alert alert-success">{{ session('massage') }}</div>
+    @endif
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner " >
+        <div class="carousel-inner ">
             @foreach ($sliders as $key => $sliderItem)
                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}  ">
                     @if ($sliderItem->image)
-                        <img class="d-block w-100" src="{{ asset("$sliderItem->image") }}" alt="First slide" width="90%" height="300px">
+                        <img class="d-block w-100" src="{{ asset("$sliderItem->image") }}" alt="First slide" width="90%"
+                            height="300px">
                     @endif
-                    <div class="carousel-caption d-none d-md-block " >
+                    <div class="carousel-caption d-none d-md-block ">
                         <div class="custom-carousel-content mt-4">
                             <h1>
-                                {!! $sliderItem->title  !!}
+                                {!! $sliderItem->title !!}
                             </h1>
                             <p>
-                               {!! $sliderItem->description !!}
+                                {!! $sliderItem->description !!}
                             </p>
                             <div>
                                 <a href="#" class="btn btn-slider">
