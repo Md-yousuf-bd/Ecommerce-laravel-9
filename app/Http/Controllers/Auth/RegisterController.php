@@ -69,5 +69,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        Redirect::to('users/login')->with('message', 'Thanks for registering!');
     }
 }
