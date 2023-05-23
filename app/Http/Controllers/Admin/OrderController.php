@@ -13,7 +13,7 @@ class OrderController extends Controller
     {
         // $todayData =  Carbon::now();
         $todayData =  '2023-02-09';
-        $data['orders'] = Order::whereDate('created_at',$todayData)->get();
+        $data['order'] = Order::whereDate('created_at',$todayData)->get();
         // dd($data);
         return view('admin.orders.index',$data);
     }
